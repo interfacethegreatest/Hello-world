@@ -11,7 +11,7 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:3000. The home page displays **Hello world 😎** and a reusable weekly calendar with previous/next navigation, Today, and date selection. The display always contains one row of seven dates; each arrow moves exactly one week.
+Open http://localhost:3000. The home page displays **Hello world 😎** and a reusable month calendar with previous/next navigation, Today, and date selection.
 
 ## Check and build
 
@@ -28,7 +28,7 @@ The production build exports static HTML, CSS, and JavaScript to `out/`.
 - `src/pages/index.tsx`: home page
 - `src/pages/_app.tsx`: application wrapper and global styles
 - `src/pages/_document.tsx`: HTML document shell
-- `src/components/calendar/Calendar.tsx`: interactive single-row week view
+- `src/components/calendar/Calendar.tsx`: interactive month grid
 - `src/components/calendar/Calendar.module.css`: scoped styles
 - `src/lib/calendar.ts`: date helpers
 - `src/styles/globals.css`: global styles

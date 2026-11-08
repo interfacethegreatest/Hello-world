@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { isSameDay, shiftWeek, weekCells } from '../../lib/calendar';
+import { addMonthsClamped, isSameDay, monthCells } from '../../lib/calendar';
 import styles from './Calendar.module.css';
 
 const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -7,36 +7,42 @@ const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 /** The parent supplies today after mount to avoid static-export hydration drift. */
 export default function Calendar({ today }: { today: Date }) {
   const [selectedDate, setSelectedDate] = useState(today);
-  const dates = weekCells(selectedDate);
-  const formatDate = (date: Date) => date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-  const weekLabel = `${formatDate(dates[0])} – ${formatDate(dates[6])}`;
+  const [viewDate, setViewDate] = useState(today);
+  const monthLabel = viewDate.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+
+  function selectDate(date: Date) {
+    setSelectedDate(date);
+    setViewDate(date);
+  }
+
+  function shiftMonth(amount: number) {
+    selectDate(addMonthsClamped(selectedDate, amount));
+  }
 
   return (
-    <section className={styles.calendar} aria-label="Weekly calendar">
+    <section className={styles.calendar} aria-label="Monthly calendar">
       <header className={styles.header}>
-        <h2 aria-live="polite">{weekLabel}</h2>
+        <h2 aria-live="polite">{monthLabel}</h2>
         <nav aria-label="Calendar navigation">
-          <button type="button" onClick={() => setSelectedDate(new Date())}>Today</button>
-          <button type="button" aria-label="Previous week" onClick={() => setSelectedDate(date => shiftWeek(date, -1))}>←</button>
-          <button type="button" aria-label="Next week" onClick={() => setSelectedDate(date => shiftWeek(date, 1))}>→</button>
+          <button type="button" onClick={() => selectDate(new Date())}>Today</button>
+          <button type="button" aria-label="Previous month" onClick={() => shiftMonth(-1)}>←</button>
+          <button type="button" aria-label="Next month" onClick={() => shiftMonth(1)}>→</button>
         </nav>
       </header>
       <div className={styles.grid}>
-        {dates.map(date => {
+        {weekdays.map(day => <span className={styles.weekday} key={day}>{day}</span>)}
+        {monthCells(viewDate).map(date => {
           const selected = isSameDay(date, selectedDate);
           return (
             <button
               key={date.toDateString()}
               type="button"
-              className={[styles.day, selected ? styles.selected : ''].join(' ')}
+              className={[styles.day, date.getMonth() !== viewDate.getMonth() ? styles.outside : '', selected ? styles.selected : ''].join(' ')}
               aria-label={date.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
               aria-pressed={selected}
               aria-current={isSameDay(date, today) ? 'date' : undefined}
-              onClick={() => setSelectedDate(date)}
-            >
-              <span className={styles.weekday}>{weekdays[date.getDay()]}</span>
-              <span>{date.getDate()}</span>
-            </button>
+              onClick={() => selectDate(date)}
+            >{date.getDate()}</button>
           );
         })}
       </div>
