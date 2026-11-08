@@ -1,0 +1,8 @@
+* { box-sizing: border-box; }
+body { margin: 0; background: #101014; color: #f4f4f6; font-family: system-ui, sans-serif; }
+main { width: min(760px, 100%); margin: 0 auto; padding: 64px 20px; }
+h1 { font-size: clamp(2rem, 6vw, 3rem); letter-spacing: -.04em; margin: 12px 0; }
+.eyebrow { text-transform: uppercase; letter-spacing: .15em; font-size: .75rem; color: #b9acff; }
+.intro { color: #b9b9c6; margin-bottom: 32px; }
+button { font: inherit; cursor: pointer; }
+button:focus-visible { outline: 3px solid #d4cbff; outline-offset: 3px; }
