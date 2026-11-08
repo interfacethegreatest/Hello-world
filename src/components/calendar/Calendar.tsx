@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { addMonthsClamped, isSameDay, monthCells } from '../../lib/calendar';
 import styles from './Calendar.module.css';
+import LayoutDiagnostics from './LayoutDiagnostics';
 
 const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 /** The parent supplies today after mount to avoid static-export hydration drift. */
 export default function Calendar({ today }: { today: Date }) {
+  const panelRef = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const [selectedDate, setSelectedDate] = useState(today);
   const [viewDate, setViewDate] = useState(today);
   const monthLabel = viewDate.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
@@ -20,7 +23,8 @@ export default function Calendar({ today }: { today: Date }) {
   }
 
   return (
-    <section className={styles.calendar} aria-label="Monthly calendar">
+    <>
+    <section ref={panelRef} className={styles.calendar} aria-label="Monthly calendar">
       <header className={styles.header}>
         <h2 aria-live="polite">{monthLabel}</h2>
         <nav aria-label="Calendar navigation">
@@ -29,7 +33,7 @@ export default function Calendar({ today }: { today: Date }) {
           <button type="button" aria-label="Next month" onClick={() => shiftMonth(1)}>→</button>
         </nav>
       </header>
-      <div className={styles.grid}>
+      <div ref={gridRef} className={styles.grid}>
         {weekdays.map(day => <span className={styles.weekday} key={day}>{day}</span>)}
         {monthCells(viewDate).map(date => {
           const selected = isSameDay(date, selectedDate);
@@ -50,5 +54,7 @@ export default function Calendar({ today }: { today: Date }) {
         Selected: {selectedDate.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
       </p>
     </section>
+    <LayoutDiagnostics panelRef={panelRef} gridRef={gridRef} month={monthLabel} />
+    </>
   );
 }

@@ -49,6 +49,12 @@ GITHUB_PAGES=true npm run build
 
 Publish the contents of `out/` using a GitHub Pages deployment workflow. Include an empty `.nojekyll` file when publishing from a branch. If the repository is renamed, update `basePath` in `next.config.mjs`. Pages hosting is not enabled by adding this starter.
 
+## Layout investigation
+
+Open the deployed site with `?layout-debug=1` to display live measurements below the calendar. The optional panel shows date count, date rows, grid/card height, padding, gap, viewport width, and header wrapping. The ordinary URL displays the restored monthly calendar without the panel. Measurements stay in the browser.
+
+The first desktop reproduction check (1363px viewport, 24 consecutive next-month clicks) consistently showed 42 dates, six date rows, a 394px grid, a 551px card, and 24px padding. Extra accumulating rows were not reproduced. The header's existing `flex-wrap: wrap` remains a possibility on narrower screens; this is a hypothesis, not a confirmed cause.
+
 ## Credits
 
 Built collaboratively by Drew and ChatGPT.

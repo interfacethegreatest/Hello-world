@@ -12,3 +12,8 @@
 .selected { background: #b9acff; color: #161125; font-weight: 700; }
 .selection { margin: 24px 0 0; font-size: .9rem; color: #cccbd7; }
 @media (max-width: 480px) { .calendar { padding: 14px; } .grid { gap: 3px; } .day { min-height: 42px; } }
+.diagnostics { margin-top: 20px; padding: 18px; border: 1px dashed #8173ba; border-radius: 12px; color: #d8d3ed; font-size: .85rem; }
+.diagnostics h2 { margin-top: 0; font-size: 1rem; }
+.diagnostics dl { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; }
+.diagnostics dt, .diagnostics dd { margin: 0; overflow-wrap: anywhere; }
+.diagnostics dd { font-variant-numeric: tabular-nums; }
