@@ -19,6 +19,11 @@ export default function Home() {
         {today ? <Calendar today={today} /> : <p role="status">Loading calendar…</p>}
         <noscript>Enable JavaScript to use the interactive calendar.</noscript>
       </main>
+      <footer className="site-footer">
+        <a href="https://github.com/interfacethegreatest">
+          GitHub · interfacethegreatest
+        </a>
+      </footer>
     </>
   );
 }
