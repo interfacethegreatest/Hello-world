@@ -6,3 +6,22 @@ h1 { font-size: clamp(2rem, 6vw, 3rem); letter-spacing: -.04em; margin: 12px 0; 
 .intro { color: #b9b9c6; margin-bottom: 32px; }
 button { font: inherit; cursor: pointer; }
 button:focus-visible { outline: 3px solid #d4cbff; outline-offset: 3px; }
+
+.site-footer {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  padding: 0 20px 32px;
+  text-align: center;
+  font-size: .9rem;
+}
+
+.site-footer a {
+  color: #b9acff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.site-footer a:focus-visible {
+  outline: 3px solid #d4cbff;
+  outline-offset: 3px;
+}
