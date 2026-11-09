@@ -29,6 +29,7 @@ export default function Calendar({ today }: { today: Date }) {
           <button type="button" aria-label="Next month" onClick={() => shiftMonth(1)}>→</button>
         </nav>
       </div>
+      <hr className={styles.divider} aria-hidden="true" />
       <div className={styles.grid}>
         {weekdays.map(day => <span className={styles.weekday} key={day}>{day}</span>)}
         {monthCells(viewDate).map(date => {
