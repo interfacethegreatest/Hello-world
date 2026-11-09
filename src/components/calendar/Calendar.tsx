@@ -21,14 +21,14 @@ export default function Calendar({ today }: { today: Date }) {
 
   return (
     <section className={styles.calendar} aria-label="Monthly calendar">
-      <header className={styles.header}>
+      <div className={styles.header} dir="ltr">
         <h2 aria-live="polite">{monthLabel}</h2>
         <nav aria-label="Calendar navigation">
           <button type="button" onClick={() => selectDate(new Date())}>Today</button>
           <button type="button" aria-label="Previous month" onClick={() => shiftMonth(-1)}>←</button>
           <button type="button" aria-label="Next month" onClick={() => shiftMonth(1)}>→</button>
         </nav>
-      </header>
+      </div>
       <div className={styles.grid}>
         {weekdays.map(day => <span className={styles.weekday} key={day}>{day}</span>)}
         {monthCells(viewDate).map(date => {

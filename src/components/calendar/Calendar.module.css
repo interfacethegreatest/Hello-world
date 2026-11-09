@@ -1,8 +1,47 @@
 .calendar { width: 100%; border: 1px solid #353541; border-radius: 16px; padding: 24px; background: #19191f; }
-.header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
-.header h2 { margin: 0; font-size: 1.3rem; }
-.header nav { display: flex; gap: 8px; }
-.header button { padding: 8px 12px; border: 1px solid #484855; border-radius: 8px; background: #262630; color: #fff; }
+.header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  min-width: 0;
+  overflow-x: auto;
+  scroll-padding-inline: 3rem;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.header nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+.header button {
+  scroll-margin-inline: 6px;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding: 8px 12px;
+  border: 1px solid #484855;
+  border-radius: 8px;
+  background: #262630;
+  color: #fff;
+}
+
+/* Keep the existing focus outline inside the scrollable row. */
+.header button:focus-visible {
+  outline-offset: -3px;
+}
 .grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
 .weekday { text-align: center; padding: 8px 0; font-size: .8rem; color: #b9b9c6; }
 .day { min-height: 54px; border: 1px solid transparent; border-radius: 8px; background: #24242d; color: #f4f4f6; font-size: 1rem; }
